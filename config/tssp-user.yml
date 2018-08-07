@@ -1,0 +1,71 @@
+server:
+  port: 20050
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+spring.boot.admin.client:
+  instance:
+    prefer-ip: true
+  url: "http://172.23.105.211:10010/admin"
+
+spring:
+  jackson:
+   default-property-inclusion: non_null
+   serialization:
+    WRITE_DATES_AS_TIMESTAMPS: true
+  main:
+    banner-mode: log
+  mail:
+    host: smtp.163.com
+    username: cusc_tsp
+    password: 88066046xx
+  messages:
+    basename: i18n/messages
+  cache:
+    redis:
+      cache-null-values: false
+
+management:
+  server:
+    port: 10020
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+master:
+  driver-class-name: com.mysql.jdbc.Driver
+  mapper-locations: classpath:mapper/master/*.xml
+  type-aliases-package: com.cusc.tssp.user.entity.mapper.master
+
+
+
+
+
+
+
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+tssp:
+  user:
+    jwtPublicKey: MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESRbJgYO2CUR207XfjxzABD4FyjYhMEENNJIgn2vOvj9NOdGvPuSlxdSXJzSSzk5kWdH6T-bo10jltSfUSrVsTg==
+    jwtPrivateKey: MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgb7w1_FOirORI_TeQ3moHhFron_XQfGA9rmBOmwBKLzugCgYIKoZIzj0DAQehRANCAARJFsmBg7YJRHbTtd-PHMAEPgXKNiEwQQ00kiCfa86-P0050a8-5KXF1JcnNJLOTmRZ0fpP5ujXSOW1J9RKtWxO
+    systemEmail: cusc_tsp@163.com
+    verifyCodeSubject: V平台门户邮箱验证码
+    verifyCodeTemplate: "尊敬的用户，你好！您的验证码是：{code}"
+
+  routing:
+    ip: http://127.0.0.1:20000
+    apiPath: /tssp/gateway/refreshApiInfoAll
+    appPath: /tssp/gateway/refreshAppInfoAll
+    envPath: /tssp/gateway/refreshEnv
+
+#logging.config: http://localhost:10015/${spring.application.name}/${spring.profiles.active}/${spring.cloud.config.label:master}/logback-spring.xml

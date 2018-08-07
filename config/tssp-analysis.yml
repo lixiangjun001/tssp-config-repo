@@ -1,0 +1,14 @@
+server:
+  port: 20030
+spring.boot.admin.client:
+  instance:
+    prefer-ip: true
+  url: "http://172.23.105.211:10010/admin"
+  
+management:
+  server:
+    port: 10030
+  endpoints:
+    web:
+      exposure:
+        include: '*'

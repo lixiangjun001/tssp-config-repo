@@ -1,0 +1,33 @@
+spring:
+ datasource:
+   mysql:
+    url: jdbc:mysql://172.23.102.55:3306/tssp_rbac?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: tssp
+    password: Tssp123
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 20
+    minIdle: 5
+    maxActive: 800
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    removeAbandoned: true
+    removeAbandonedTimeout: 1800
+    logAbandoned: true
+    slowSqlMillis: 1000
+    logSlowSql: true
+    statementCreateAfterLogEnabled: false
+    statementPrepareAfterLogEnabled: false
+    statementPrepareCallAfterLogEnabled: false
+    statementCloseAfterLogEnabled: false
+    statementParameterClearLogEnable: false
+  #zipkin:
+  #  base-url: http://172.23.105.209:9411
+
+spring.boot.admin.client:
+  url: "http://172.23.102.55:10010/admin"

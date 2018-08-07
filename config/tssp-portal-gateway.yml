@@ -1,0 +1,55 @@
+server: 
+  port: 20040
+spring.boot.admin.client: 
+  instance: 
+    prefer-ip: true
+  url: "http://172.23.105.211:10010/admin"
+  
+management: 
+  server: 
+    port: 10040
+  endpoints: 
+    web: 
+      exposure: 
+        include: '*'
+spring:
+  cloud:
+    gateway:
+      locator:
+        enabled: true
+    #default-filters:
+    #- StripPrefix= 1
+    #- name: Hystrix
+      #args:
+        #name: authHystrixCommand
+        #fallbackUri: forward:/hystrixTimeout
+      routes:
+      # ===========manage===========
+      - id: service_to_manage
+        uri: lb://TSSP-MANAGE
+        order: 8000
+        predicates:
+        - Path=/manage/**
+        filters:
+        - StripPrefix=1
+      # ===========analysis===========
+      - id: service_to_analysis
+        uri: lb://TSSP-ANALYSIS
+        order: 8000
+        predicates:
+        - Path=/analysis/**
+        filters:
+        - StripPrefix=1
+      # ===========user===========
+      - id: service_to_user
+        uri: lb://TSSP-USER
+        order: 8000
+        predicates: 
+        - Path=/user/**
+        filters: 
+        - StripPrefix=1
+
+tssp:
+  user:
+    jwtPublicKey: MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESRbJgYO2CUR207XfjxzABD4FyjYhMEENNJIgn2vOvj9NOdGvPuSlxdSXJzSSzk5kWdH6T-bo10jltSfUSrVsTg==
+    jwtPrivateKey: MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgb7w1_FOirORI_TeQ3moHhFron_XQfGA9rmBOmwBKLzugCgYIKoZIzj0DAQehRANCAARJFsmBg7YJRHbTtd-PHMAEPgXKNiEwQQ00kiCfa86-P0050a8-5KXF1JcnNJLOTmRZ0fpP5ujXSOW1J9RKtWxO

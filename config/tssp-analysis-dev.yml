@@ -1,0 +1,30 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers:
+          - 172.23.105.211:9092
+          zk-nodes:
+          - 172.23.105.211:2181
+          auto-add-partitions: true
+          auto-create-topics: true
+      bindings:
+        analysis: 
+          group: tssp-analysis
+          destination: analysis
+          consumer: 
+            auto-commit-offset: false
+            auto-rebalance-enabled: true
+              
+  data:
+    mongodb:
+      #uri: mongo://172.23.105.211:27017/tssp
+      host: 172.23.105.211
+      port: 27017
+      database: tssp
+      #authentication-database: tssp
+      #username: tssp
+      #password: tssp123
+spring.boot.admin.client:
+  url: "http://172.23.105.211:10010/admin"

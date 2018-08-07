@@ -1,0 +1,36 @@
+spring:
+  redis:
+    host: 172.23.105.211
+    port: 6379
+    password: 123456
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers:
+          - 172.23.105.211:9092
+          zk-nodes:
+          - 172.23.105.211:2181
+          #auto-create-topics: true
+          #auto-add-partitions: true
+          #configuration: 
+            #auto: 
+              #offset: 
+                #reset: latest
+    bindings: 
+      gateway: 
+        destination: gateway
+        content-type: text/plain
+        #group: tssp-dev
+master:
+  jdbc-url: jdbc:mysql://172.23.105.211:3306/tssp_manage?useUnicode=true&characterEncoding=utf8&useSSL=false
+  username: tssp
+  password: Tssp123
+
+tssp:
+  routing:
+    ip: http://172.23.105.211:20000
+
+
+spring.boot.admin.client:
+  url: "http://172.23.105.211:10010/admin"

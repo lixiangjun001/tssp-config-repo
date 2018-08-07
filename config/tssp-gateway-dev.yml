@@ -1,0 +1,45 @@
+spring:
+  redis:
+   database: 0
+   host: 172.23.105.211
+   port: 6379
+   password: 123456
+   pool:
+    max-active: 500
+    max-wait: 1000
+    max-idle: 8
+    min-idle: 0
+   timeout: 60000
+  datasource:
+    url: jdbc:mysql://172.23.105.211:3306/tssp_manage?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: tssp
+    password: Tssp123
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers:
+          - 172.23.105.211:9092
+          zk-nodes:
+          - 172.23.105.211:2181
+          auto-add-partitions: true
+          auto-create-topics: true
+      bindings:
+        gateway: 
+          destination: gateway
+          #content-type: text/plain
+          consumer: 
+            auto-commit-offset: false
+            auto-rebalance-enabled: true
+        analysis: 
+          destination: analysis
+          content-type: text/plain
+    gateway:
+      default-filters:
+      - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+      routes:
+     
+        
+management.endpoints.web.exposure.include: '*'
+spring.boot.admin.client:
+  url: "http://172.23.105.211:10010/admin"

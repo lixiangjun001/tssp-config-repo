@@ -1,0 +1,2 @@
+spring.boot.admin.client: 
+  url: "http://172.23.102.55:10010/admin"

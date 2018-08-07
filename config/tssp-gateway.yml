@@ -1,0 +1,46 @@
+spring:
+ datasource:
+  driver-class-name: com.mysql.jdbc.Driver
+  initialSize: 20
+  minIdle: 5
+  maxActive: 800
+  maxWait: 60000
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: SELECT 1 FROM DUAL
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  filters: stat
+        
+server:
+  port: 20060
+
+spring.cloud.inetutils:
+      ignored-interfaces:
+        - docker*
+        - veth*
+        - lo
+
+spring.boot.admin.client:
+  instance:
+    prefer-ip: true
+  url: "http://172.23.105.211:10010/admin"
+  
+management:
+  server:
+    port: 10060
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  
+mybatis:
+ mapperLocations: classpath:mapper/*.xml
+ type-aliases-package: com.cusc.tssp.gateway.domain.model
+ 
+#properties
+constants:
+ subIndex: 2
+ cacheTtl: 1000
+ nonceTtl: 20
